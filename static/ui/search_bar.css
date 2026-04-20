@@ -1,0 +1,76 @@
+/* ===== FILTER SECTION ===== */
+.modern-filter {
+    display: flex;
+    gap: 15px;
+    padding: 15px 20px;
+    margin: 20px auto;
+    max-width: 950px;
+
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(12px);
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+/* Filter Box */
+.filter-box {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    padding: 12px 15px;
+    border-radius: 10px;
+    flex: 1;
+    min-width: 220px;
+    transition: 0.3s;
+}
+
+.filter-box:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Icon */
+.filter-icon {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+/* Inputs */
+.filter-box input,
+.filter-box select {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 14px;
+    background: transparent;
+}
+
+/* Button */
+.filter-btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.filter-btn:hover {
+    transform: scale(1.05);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .modern-filter {
+        flex-direction: column;
+    }
+
+    .filter-btn {
+        width: 100%;
+    }
+}

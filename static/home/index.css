@@ -1,0 +1,119 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+.home {
+    padding: 50px 20px;
+    background: #f8f9fb;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+}
+
+.home-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+/* Card */
+.home-card {
+    background: #fff;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+
+.home-card:hover {
+    transform: translateY(-8px);
+}
+
+/* Image */
+.img-box {
+    overflow: hidden;
+}
+
+.img-box img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: 0.5s ease;
+}
+
+/* Zoom OUT effect */
+.home-card:hover img {
+    transform: scale(0.9);
+}
+
+/* Content */
+.home-content {
+    padding: 15px;
+    text-align: left;
+}
+
+.home-content h3 {
+    margin-bottom: 8px;
+}
+
+.location {
+    color: gray;
+    font-size: 14px;
+}
+
+.price {
+    color: #007bff;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+/* Button */
+.home-content button {
+    padding: 8px 15px;
+    border: none;
+    background: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.home-content button:hover {
+    background: #0056b3;
+}
+
+/* Responsive */
+@media(max-width: 600px) {
+    .section-title {
+        font-size: 1.8rem;
+    }
+}
+
+
+/* WhatsApp Button */
+.whatsapp-btn {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background: #25D366;
+    color: white;
+    font-size: 22px;
+    padding: 12px;
+    border-radius: 50%;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.whatsapp-btn:hover {
+    background: #1ebe5d;
+    transform: scale(1.1);
+}

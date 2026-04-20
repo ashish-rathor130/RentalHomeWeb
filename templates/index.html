@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% include "./ui/search_bar.html" %}
+
+<header>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'home/index.css' %}">
+  <style>
+
+/* WhatsApp Button */
+.whatsapp-btn {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background: #25D366;
+    color: white;
+    font-size: 22px;
+    padding: 8px;
+    border-radius: 50%;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.whatsapp-btn:hover {
+    background: #1ebe5d;
+    transform: scale(1.1);
+}
+.view-btn {
+    background: #007BFF;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 25px;
+    font-size: 14px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+  </style>
+</header>
+<section class="home">
+    <h2 class="section-title">Explore Our Homes</h2>
+
+    <div class="home-container">
+
+        <!-- Card 1 -->
+        {% for room in rooms %}
+        <div class="home-card">
+            <div class="img-box">
+                <img src="{{ room.image.url }}" alt="house">
+            </div>
+            <div class="home-content">
+                <h3>{{ room.title }}</h3>
+                <p class="location">📍 {{ room.location }}</p>
+                <p class="price">₹{{ room.price }} / month</p>
+                {% if room.is_available %}
+                    <p class="price"><small>Available</small></p>
+                {% else %}
+                    <p class="price"><small>Booked</small></p>
+                {% endif %}
+                {% if request.user.is_phone_verified %}
+                    <a href="https://wa.me/{{ property.host.phone_number }}?text=Hi, I'm interested in your property: {{ property.title }}"
+                    class="whatsapp-btn"
+                    target="_blank">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                {% endif %}
+                <button><a href="{% url 'property_detail' room.id %}" class="view-btn">View</a></button>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</section>
+{% endblock content %}

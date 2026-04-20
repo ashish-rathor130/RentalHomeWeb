@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+{% block title %}Subscription Plans{% endblock title %}
+
+{% block content %}
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .subscription-body {
+
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        .plans {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            transition: 0.3s;
+            border:2px solid #ddd;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card h2 {
+            margin-bottom: 10px;
+        }
+
+        .price {
+            font-size: 28px;
+            color: #4facfe;
+            margin: 15px 0;
+        }
+
+        ul {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        ul li {
+            margin: 10px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 20px;
+            background: #4facfe;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #007bff;
+        }
+
+        /* Highlight Recommended */
+        .recommended {
+            border: 3px solid gold;
+            transform: scale(1.05);
+        }
+
+        @media(max-width: 768px) {
+            .plans {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<div class="subscription-body">
+
+<h1>Choose Your Plan</h1>
+
+<div class="plans">
+
+    <!-- FREE -->
+    <div class="card">
+        <h2>Free</h2>
+        <p class="price">₹0</p>
+
+        <ul>
+            <li>✔ 5 Homes</li>
+            <li>✔ 1 Month</li>
+            <li>✔ Basic Support</li>
+        </ul>
+
+        <a href="{% url 'buy_subscription' 'free' %}" class="btn">
+            Get Started
+        </a>
+    </div>
+
+    <!-- RECOMMENDED -->
+    <div class="card recommended">
+        <h2>Recommended</h2>
+        <p class="price">₹199</p>
+
+        <ul>
+            <li>✔ 20 Homes</li>
+            <li>✔ 1 Month</li>
+            <li>✔ Priority Listing</li>
+        </ul>
+
+        <a href="{% url 'payment_page' 'recommended' %}" class="btn">
+            Buy Now
+        </a>
+    </div>
+
+    <!-- PRO -->
+    <div class="card">
+        <h2>Pro</h2>
+        <p class="price">₹499</p>
+
+        <ul>
+            <li>✔ Unlimited Homes</li>
+            <li>✔ 1 Month</li>
+            <li>✔ Premium Support</li>
+        </ul>
+
+        <a href="{% url 'payment_page' 'pro' %}" class="btn">
+            Go Pro
+        </a>
+    </div>
+
+</div>
+
+</div>
+
+{% endblock %}

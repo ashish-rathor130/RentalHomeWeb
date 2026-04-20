@@ -1,0 +1,32 @@
+<!-- ===== Modern Filter Section ===== -->
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'ui/search_bar.css' %}">
+</head>
+
+<form method="GET">
+    <div class="modern-filter">
+
+        <!-- Location -->
+        <div class="filter-box">
+            <span class="filter-icon">📍</span>
+            <input type="text" name="location" placeholder="Search location..." value="{{ request.GET.location }}">
+        </div>
+
+        <!-- Price -->
+        <div class="filter-box">
+            <span class="filter-icon">💰</span>
+            <select name="price">
+                <option value="">Select Price</option>
+                <option value="1000">Under ₹1000</option>
+                <option value="2000">Under ₹2000</option>
+                <option value="5000">Under ₹5000</option>
+                <option value="10000">₹10000+</option>
+            </select>
+        </div>
+
+        <!-- Button -->
+        <button type="submit" class="filter-btn">Search</button>
+
+    </div>
+</form>

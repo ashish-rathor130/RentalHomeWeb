@@ -1,0 +1,209 @@
+{% extends "base.html" %}
+{% block title %}Property Detail{% endblock title %}
+
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ property.title }}</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .detail-page {
+            background: #f5f7fa;
+        }
+
+        /* CONTAINER */
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        /* IMAGE */
+        .image-section img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        /* CONTENT */
+        .content {
+            padding: 25px;
+        }
+
+        .title {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .location {
+            color: #777;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-size: 22px;
+            color: #4facfe;
+            margin-bottom: 15px;
+        }
+
+        .description {
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        /* RATING */
+        .rating i {
+            color: gold;
+        }
+
+        /* BUTTONS */
+        .actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .book-btn {
+            background: #4facfe;
+            color: white;
+        }
+
+        .book-btn:hover {
+            background: #007bff;
+        }
+
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+        }
+
+        .whatsapp-btn:hover {
+            background: #1ebe5d;
+        }
+
+        /* HOST INFO */
+        .host {
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .host h4 {
+            margin-bottom: 5px;
+        }
+
+        /* RESPONSIVE */
+        @media(max-width: 768px) {
+            .image-section img {
+                height: 250px;
+            }
+
+            .title {
+                font-size: 22px;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+        }
+
+    </style>
+</head>
+
+<div class ='detail-page'>
+
+<div class="container">
+    <div class="card">
+
+        <!-- IMAGE -->
+        <div class="image-section">
+            <img src="{{ property.image.url }}" alt="Property Image">
+        </div>
+
+        <!-- DETAILS -->
+        <div class="content">
+            <h1 class="title">{{ property.title }}</h1>
+            <p class="location">
+                <i class="fa-solid fa-location-dot"></i> {{ property.location }}
+            </p>
+
+            <p class="price">₹{{ property.price }} / month</p>
+
+            <!-- Rating UI -->
+            <div class="rating">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+            </div>
+
+            <p class="description">
+                {{ property.description }}
+            </p>
+
+            <!-- ACTION BUTTONS -->
+            <div class="actions">
+
+                <!-- BOOK BUTTON (Anchor Link) -->
+                <a href="{% url 'book_property' property.id %}" class="btn book-btn">
+                    <i class="fa-solid fa-calendar-check"></i> Book Now
+                </a>
+
+                <!-- WHATSAPP -->
+                <a href="https://wa.me/{{ property.host.phone_number }}?text=Hi, I'm interested in {{ property.title }}"
+                   class="btn whatsapp-btn"
+                   target="_blank">
+                    <i class="fa-brands fa-whatsapp"></i> Chat
+                </a>
+
+            </div>
+
+            <!-- HOST INFO -->
+            <div class="host">
+                <h4>Hosted by <span style="text-transform: capitalize;">{{ property.host.username }}</span></h4>
+                <p>Trusted host providing quality homes.</p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</div>
+</html>
+{% endblock %}

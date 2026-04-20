@@ -1,0 +1,193 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<title>Signup - RentalHome</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* BACKGROUND */
+.signup-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* CONTAINER */
+.signup-container {
+    margin-top: 50px;
+    backdrop-filter: blur(12px);
+    padding: 40px;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    color: white;
+    text-align: center;
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+}
+
+/* TITLE */
+.signup-container h2 {
+    margin-bottom: 20px;
+}
+
+/* INPUTS */
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.input-group label {
+    font-size: 14px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+}
+
+/* BUTTON */
+.signup-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background: white;
+    color: #4facfe;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.signup-btn:hover {
+    background: #222;
+    color: white;
+}
+
+/* GOOGLE BUTTON */
+.google-btn {
+    margin-top: 15px;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #fff;
+    color: #444;
+    cursor: pointer;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transition: 0.3s;
+}
+
+.google-btn:hover {
+    background: #f1f1f1;
+}
+
+/* LINKS */
+.links {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}
+
+/* RESPONSIVE */
+@media (max-width: 480px) {
+    .signup-container {
+        margin: 20px;
+        padding: 30px;
+    }
+}
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid rgba(255,255,255,0.5);
+}
+
+.divider span {
+    padding: 0 10px;
+    font-size: 14px;
+    color: white;
+}
+</style>
+</head>
+
+<div class="signup-body">
+
+<div class="signup-container">
+    <h2>Create Account</h2>
+
+    <form method="POST" action="{% url 'signup' %}">
+        {% csrf_token %}
+
+        <div class="input-group">
+            <label>Username</label>
+            <input type="text" placeholder="Enter your username" required name="username">
+        </div>
+
+        <div class="input-group">
+            <label>Email</label>
+            <input type="email" placeholder="Enter your email" required name="email">
+        </div>
+
+        <div class="input-group">
+            <label>Password</label>
+            <input type="password" placeholder="Create password" required name="password">
+        </div>
+
+        <div class="input-group">
+            <label>Confirm Password</label>
+            <input type="password" placeholder="Confirm password" required name="confirm_password">
+        </div>
+
+        <button class="signup-btn" type='submit'>Sign Up</button>
+    </form>
+
+    <div class="divider">
+    <span>OR</span>
+</div>
+
+    {% comment %} <a href="{% url 'google_login' %}" class="google-btn">
+    <img src="https://cdn-icons-png.flaticon.com/512/281/281764.png" width="18">
+    Sign up with Google
+    </a> {% endcomment %}
+
+    <div class="links">
+        <p>Already have an account? <a href="{% url "login" %}">Login</a></p>
+    </div>
+</div>
+
+</div>
+</html>
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Verify Mobile Number{% endblock title %}
+{% block content %}
+
+
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'auth/verify_mobile.css' %}">
+</head>
+
+<body>
+
+<div class="mobile-container">
+    <h2>Verify Your Mobile</h2>
+    <p>Enter your phone number to receive a verification code</p>
+
+
+<!-- Django Messages -->
+<div class="messages">
+    {% for message in messages %}
+        <div class="{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+</div>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <div class="input-group">
+        <div class="country-code">+91</div>
+        <input type="tel" name="phone" placeholder="Enter mobile number" required pattern="[0-9]{10}">
+    </div>
+
+    <button type="submit" class="send-btn">Send OTP</button>
+</form>
+
+<div class="note">
+    We will send a one-time password (OTP) to this number
+</div>
+
+
+</div>
+
+</body>
+
+{% endblock %}

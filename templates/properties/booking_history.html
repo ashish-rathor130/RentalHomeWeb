@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+{% block title %}My Bookings{% endblock title %}
+
+{% block content %}
+    <style>
+        .booking-body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f5f7fa;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .booking-card {
+            display: flex;
+            background: white;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .booking-card img {
+            width: 200px;
+            object-fit: cover;
+        }
+
+        .details {
+            padding: 15px;
+            flex: 1;
+        }
+
+        .status {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .booked {
+            color: green;
+        }
+
+        .cancelled {
+            color: red;
+            
+        }
+
+        .actions {
+            margin-top: 0px;
+        }
+
+        .cancel-btn {
+            background: red;
+            color: white;
+            gap: 6px;
+            padding: 8px 14px;
+            border-radius: 25px;
+            font-size: 14px;
+            text-decoration: none;
+            transition: 0.3s;
+
+        }
+
+        .cancel-btn:hover {
+            background: darkred;
+        }
+
+        @media(max-width: 768px) {
+            .booking-card {
+                flex-direction: column;
+            }
+
+            .booking-card img {
+                width: 100%;
+            }
+        }
+        
+.whatsapp-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #25D366;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 25px;
+    font-size: 14px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+/* Icon */
+.whatsapp-btn i {
+    font-size: 16px;
+}
+
+/* Hover Effect */
+.whatsapp-btn:hover {
+    background: #1ebe5d;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(0,0,0,0.2);
+}
+.action-btns {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    align-items: center;
+}
+    </style>
+</head>
+
+<div class='booking-body'>
+
+<div class="container">
+    <h2>My Bookings</h2>
+
+    {% for booking in bookings %}
+    <div class="booking-card">
+
+        <img src="{{ booking.property.image.url }}">
+
+        <div class="details">
+            <h3>{{ booking.property.title }}</h3>
+            <p>{{ booking.property.location }}</p>
+
+            <p>
+                <strong>Check-in:</strong> {{ booking.check_in }} <br>
+                <strong>Check-out:</strong> {{ booking.check_out }}
+            </p>
+
+            <p class="status {{ booking.status }}">
+                Status: {{ booking.status|title }}
+            </p>
+            
+            <div class="action-btns">
+            <a href="tel:{{ booking.property.host.phone_number }}" class="whatsapp-btn">
+                <i class="fa-solid fa-phone"></i> Call Host
+            </a>
+            <a href="https://wa.me/{{ booking.property.host.phone_number }}"
+                class="whatsapp-btn"
+                target="_blank">
+                <i class="fa-brands fa-whatsapp"></i> Chat
+            </a>
+            <div class="actions">
+                {% if booking.status == 'booked' %}
+                    <a href="{% url 'cancel_booking' booking.id %}" class="cancel-btn">
+                        <i class="fa-solid fa-xmark"></i> Cancel
+                    </a>
+                {% endif %}
+            </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+        <p style="text-align:center;">No bookings yet.</p>
+    {% endfor %}
+</div>
+
+</div>
+{% endblock %}

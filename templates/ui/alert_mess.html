@@ -1,0 +1,84 @@
+<style>
+    /* Popup overlay */
+.popup {
+  display: none; /* hidden by default */
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  width: auto;
+  max-width: 300px;
+  background:linear-gradient(135deg, #2575fc, #6a11cb); /* green success */
+  opacity: 0.95;
+  color: #fff;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  animation: slideIn 0.5s ease-out;
+  font-family: Arial, sans-serif;
+}
+
+/* Popup content */
+.popup-content h3 {
+  margin: 0;
+  font-size: 18px;
+}
+.popup-content p {
+  margin: 5px 0 0;
+  font-size: 14px;
+}
+
+/* Slide-in animation */
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .popup {
+    left: 50%;
+    right: auto;
+    top:50px;
+    transform: translateX(-50%);
+    max-width: 100%;
+    width:80%;
+  }
+}
+.cross{
+  position: absolute;
+  top: 2px;
+  right: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #fff;
+}
+</style>
+
+<!-- Success popup -->
+{% if messages %}
+<div id="popup" class="popup">
+  <div class="popup-content">
+    <span class ="cross">	&#128473;</span>
+    {% for message in messages %}
+      <p style = "padding:0 30px; text-align:left;">{{ message }}</ps>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
+<script>
+    function showPopup() {
+  const popup = document.getElementById("popup");
+  popup.style.display = "block";
+
+  // Auto-hide after 3 seconds
+  setTimeout(() => {
+    popup.style.display = "none";
+  }, 3000);
+}
+
+// Example usage: call showPopup() after user creation
+showPopup();
+
+</script>

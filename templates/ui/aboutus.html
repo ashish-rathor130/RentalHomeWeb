@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block title %}About Us{% endblock title %}
+
+{% block content %}
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'ui/aboutus.css' %}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+
+<div class="aboutus-container">
+
+<!-- HERO SECTION -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>About Our Platform</h1>
+        <p>Find your perfect home with comfort, affordability, and trust.</p>
+    </div>
+</section>
+
+<!-- ABOUT SECTION -->
+<section class="about">
+    <div class="container">
+        <div class="about-text">
+            <h2>Who We Are</h2>
+            <p>
+                We are a modern home rental platform dedicated to helping people find
+                comfortable and affordable living spaces. Our mission is to simplify
+                the process of booking homes while ensuring safety, transparency,
+                and convenience for everyone.
+            </p>
+        </div>
+
+        <div class="about-image">
+            <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2" alt="home">
+        </div>
+    </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+    <h2>Why Choose Us</h2>
+    <div class="feature-grid">
+
+        <div class="feature-card">
+            <i class="fa-solid fa-indian-rupee-sign"></i>
+            <h3>Affordable Prices</h3>
+            <p>We provide homes at budget-friendly prices without compromising quality.</p>
+        </div>
+
+        <div class="feature-card">
+            <i class="fa-solid fa-shield-halved"></i>
+            <h3>Secure Booking</h3>
+            <p>Your data and transactions are completely safe and protected.</p>
+        </div>
+
+        <div class="feature-card">
+            <i class="fa-solid fa-house"></i>
+            <h3>Quality Homes</h3>
+            <p>Carefully verified homes with all essential facilities.</p>
+        </div>
+
+        <div class="feature-card">
+            <i class="fa-solid fa-location-dot"></i>
+            <h3>Best Locations</h3>
+            <p>Find homes in prime and convenient locations.</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- MISSION -->
+<section class="mission">
+    <div class="mission-content">
+        <h2>Our Mission</h2>
+        <p>
+            Our goal is to make home renting easy, reliable, and accessible for everyone.
+            We connect tenants and property owners on a trusted platform with modern
+            technology and seamless user experience.
+        </p>
+    </div>
+</section>
+
+
+</div>
+</html>
+{% endblock content %}

@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block title %}Profile{% endblock title %}
+
+{% block content %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'auth/profile.css' %}">
+
+<div class="profile-container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="profile-card">
+
+            <img src="{% if user.profile.image %}{{ user.profile.image.url }}{% else %}{% static "media/default.avif" %}{% endif %}" class="profile-img">
+
+            <h3>{{ user.username }}</h3>
+            <p>{{ user.email }}</p>
+            <br>
+            <div class="profile-actions">
+                {% if request.user.is_phone_verified %}
+                <h4>{{ user.phone }}</h4>
+                <span class="verified">Mobile Verified</span>
+                {% else %}
+                <span class="not-verified">Mobile Not Verified</span>
+                <a href="{% url 'send_mobile_otp' request.user.id %}" class="btn">Verify Mobile</a>
+                {% endif %}
+                <p>{{ user.address }}</p>
+                
+                <a href="{% url 'update_profile' %}" class="btn">Upload Profile</a>
+                <a href="{% url 'edit_profile' %}" class="btn">Edit Profile</a>
+                <a href="{% url 'change_password' %}" class="btn">Update Password</a>
+                
+                {% if request.user.is_phone_verified %}
+                <a href="{% url 'booking_history' %}" class="btn">Booking History</a>
+                {% endif %}
+
+                <a href="{% url 'logout' %}" class="btn logout">Logout</a>
+            </div>
+
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="profile-content">
+
+        <!-- Welcome -->
+        <section class="welcome-box">
+            <h2 style = 'text-transform: capitalize;'>Welcome, {{ user.username }}!</h2>
+            <p>Manage your rooms and bookings easily.</p>
+        </section>
+
+        <!-- Host Rooms -->
+        {% if request.user.is_host %}
+        <section class="section">
+            <h3>Your Hosted Rooms</h3>
+
+            <div class="card-grid">
+                {% for room in rooms %}
+                <div class="room-card">
+                    <img src="{{ room.image.url }}">
+                    <div class="room-info">
+                        <h4>{{ room.title }}</h4>
+                        <p>📍 {{ room.location }}</p>
+                        <span>₹{{ room.price }}/month</span>
+                        {% if room.is_available %}
+                            <p class="price"><small>Available</small></p>
+                            <a href="{% url 'edit_property' room.id %}" class="edit-btn">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                        {% else %}
+                            <p class="price"><small>Booked</small></p>
+                        {% endif %}
+                    </div>
+                </div>
+                {% empty %}
+                <p>No rooms listed yet.</p>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- Booking History -->
+        <section class="section">
+            <h3>Booking History</h3>
+
+            <div class="booking-list">
+                {% for booking in bookings %}
+                <div class="booking-card">
+                    <div>
+                        <h4>{{ booking.room.title }}</h4>
+                        <p>{{ booking.check_in }} → {{ booking.check_out }}</p>
+                    </div>
+                    <span class="status">{{ booking.status }}</span>
+                </div>
+                {% empty %}
+                <p>No bookings found.</p>
+                {% endfor %}
+            </div>
+        </section>
+
+    </main>
+
+</div>
+
+{% endblock content %}

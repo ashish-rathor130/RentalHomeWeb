@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}
+Email OTP Verification
+{% endblock title %}
+
+
+{% block content %}
+<header>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'auth/verify_otp.css' %}">
+</header>
+
+<div class="verify-otp-page">
+  <div class="otp-container">
+    <h2>Verify Your Email</h2>
+    <p>Please enter the 6-digit OTP sent to your email.</p>
+    <!-- Countdown timer -->
+    <div id="countdown" class="countdown">OTP valid for 05:00</div>
+    
+    <form method="POST">
+      {% csrf_token %}
+      <div class="otp-inputs">
+        <input type="text" maxlength="1" required>
+        <input type="text" maxlength="1" required>
+        <input type="text" maxlength="1" required>
+        <input type="text" maxlength="1" required>
+        <input type="text" maxlength="1" required>
+        <input type="text" maxlength="1" required>
+      </div>
+      <input type="hidden" name="otp" id="otpField">
+      <button type="" class="btn" id="verify-btn">Verify</button>
+    </form>
+    <p class="footer-text">
+      Didn't receive the code? 
+      <a href="{% url 'resend_otp' user_id %}">Resend OTP</a>
+    </p>
+  </div>
+
+  <script>
+    const inputs = document.querySelectorAll('.otp-inputs input');
+    const otpField = document.getElementById('otpField');
+    const form = document.querySelector('form');
+    const verifyBtn = document.getElementById('verify-btn');
+    const countdownEl = document.getElementById('countdown');
+
+    // Auto-focus next input and handle backspace
+    inputs.forEach((input, index) => {
+      input.addEventListener('input', () => {
+        if (input.value.length === 1 && index < inputs.length - 1) {
+          inputs[index + 1].focus();
+        }
+      });
+      input.addEventListener('keydown', (e) => {
+        if (e.key === "Backspace" && !input.value && index > 0) {
+          inputs[index - 1].focus();
+        }
+      });
+    });
+
+    // Combine OTP before form submission
+    verifyBtn.addEventListener('click', (event) => {
+      let otp = '';
+      inputs.forEach(input => otp += input.value);
+      otpField.value = otp;
+      console.log("Entered OTP:", otp);
+    });
+
+    // Countdown timer (5 minutes = 300 seconds)
+    let timeLeft = 300;
+    const timer = setInterval(() => {
+      let minutes = Math.floor(timeLeft / 60);
+      let seconds = timeLeft % 60;
+      countdownEl.textContent = `OTP valid for ${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+      if (timeLeft <= 0) {
+        clearInterval(timer);
+        countdownEl.textContent = "OTP expired!";
+        countdownEl.classList.add("expired");
+        verifyBtn.disabled = true; // disable button when expired
+      }
+      timeLeft--;
+    }, 1000);
+  </script>
+</div>
+
+
+{% endblock  %}
