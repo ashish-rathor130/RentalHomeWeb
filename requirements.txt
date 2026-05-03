@@ -5,4 +5,4 @@ django-messages==0.6.0
 django-otp==1.7.0
 django-slugfield==0.9
 pyotp==2.9.0
-
+gunicorn==21.2.0
