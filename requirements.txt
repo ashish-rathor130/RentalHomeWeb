@@ -1,4 +1,4 @@
-﻿Pillow==10.2.0
+﻿Pillow==11.2.1
 Django==5.2.6
 django-cors-headers==4.9.0
 django-messages==0.6.0
